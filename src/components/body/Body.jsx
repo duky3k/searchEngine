@@ -10,7 +10,8 @@ import { DownOutlined, UpOutlined, LogoutOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { SearchResultsList } from "./SearchBar/SearchResultList";
-const { Header, Content, Footer } = Layout;
+import Header from "../header/Header";
+const { Content, Footer } = Layout;
 
 const App = () => {
   const options = [
@@ -185,6 +186,7 @@ const App = () => {
           </Button>
         </div>
       </Header> */}
+      <Header/>
       <Content
         style={{
           padding: "0 50px",

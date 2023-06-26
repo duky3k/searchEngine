@@ -1,24 +1,27 @@
 import React from 'react';
-import { Menu, Button } from 'antd';
-import { LogoutOutlined } from '@ant-design/icons';
+import { Button, Avatar, Typography } from 'antd';
+import { ExportOutlined, UserOutlined } from '@ant-design/icons';
+import logo from './logo.png';
+import './Header.css';
+
+const { Text } = Typography;
 
 const Header = () => {
   return (
-    <div>
-      <div className="demo-logo" />
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['1']}
-      >
-        <Menu.Item key="1">Home</Menu.Item>
-        <Menu.Item key="2">About</Menu.Item>
-        <Menu.Item key="3">Services</Menu.Item>
-        <Menu.Item key="4">Contact</Menu.Item>
-      </Menu>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Button type="text" danger icon={<LogoutOutlined />}>
-          Sign Out
+    <div className="header">
+      <div className="logo">
+        <img src={logo} alt="Logo" />
+      </div>
+      <div className="user-info">
+      <Avatar className="user-avatar" icon={<UserOutlined />} />
+        <Text className="username">Elizabeth Lincoln</Text>
+        
+        <Button
+          type="text"
+          icon={<ExportOutlined />}
+          className="logout-button"
+        >
+          <span>Sign Out</span>
         </Button>
       </div>
     </div>

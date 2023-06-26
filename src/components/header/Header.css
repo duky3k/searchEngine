@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  height: 80px;
+  padding: 0 20px;
+}
+
+.logo {
+  width: 200px;
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-avatar {
+    margin-right: 10px;
+  }
+  
+
+.logout-button {
+  background-color: burlywood;
+  border: none;
+  margin-left: 20px;
+}
+
+.logout-button span {
+  color: black;
+}

@@ -1,8 +1,12 @@
 import React from 'react'
+import Header from '../../components/header/Header'
 
 const DetailSearch = () => {
   return (
-    <div>DetailSearch</div>
+    <div>
+      <Header />
+      123123123
+    </div>
   )
 }
 

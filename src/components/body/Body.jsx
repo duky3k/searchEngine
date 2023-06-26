@@ -160,31 +160,31 @@ const App = () => {
   });
   return (
     <Layout className="layout">
-      <Header
-  style={{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between", // Căn phần tử phía trái và phải
-  }}
->
-  <div className="demo-logo" />
-  <Menu
-    theme="dark"
-    mode="horizontal"
-    defaultSelectedKeys={["1"]}
-    items={[
-      { key: "1", label: "Home" },
-      { key: "2", label: "About" },
-      { key: "3", label: "Services" },
-      { key: "4", label: "Contact" },
-    ]}
-  />
-  <div style={{ display: "flex", alignItems: "center" }}>
-    <Button type="text" danger icon={<LogoutOutlined />}>
-      Sign Out
-    </Button>
-  </div>
-</Header>
+      {/* <Header
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between", // Căn phần tử phía trái và phải
+        }}
+      >
+        <div className="demo-logo" />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={["1"]}
+          items={[
+            { key: "1", label: "Home" },
+            { key: "2", label: "About" },
+            { key: "3", label: "Services" },
+            { key: "4", label: "Contact" },
+          ]}
+        />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Button type="text" danger icon={<LogoutOutlined />}>
+            Sign Out
+          </Button>
+        </div>
+      </Header> */}
       <Content
         style={{
           padding: "0 50px",

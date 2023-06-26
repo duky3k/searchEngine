@@ -6,11 +6,12 @@ import {
   Typography,
   theme,
 } from "antd";
-import { DownOutlined,  UpOutlined } from "@ant-design/icons";
+import { DownOutlined, UpOutlined, LogoutOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { SearchResultsList } from "./SearchBar/SearchResultList";
 const { Header, Content, Footer } = Layout;
+
 const App = () => {
   const options = [
     {
@@ -69,57 +70,57 @@ const App = () => {
         },
         {
           value: "Discover All Cases Tagged With Lower Limb",
-          label: "Discover All Cases Tagged With Lower Limb"
+          label: "Discover All Cases Tagged With Lower Limb",
         },
         {
-          value:"Upper Leg",
-          label: "Upper Leg"
+          value: "Upper Leg",
+          label: "Upper Leg",
         },
         {
-          value:"Knee",
-          label: "Knee"
+          value: "Knee",
+          label: "Knee",
         },
         {
-          value:"Lower Leg",
-          label: "Lower Leg"
+          value: "Lower Leg",
+          label: "Lower Leg",
         },
         {
-          value:"Foot, Heel, and Toes",
-          label: "Foot, Heel, and Toes"
+          value: "Foot, Heel, and Toes",
+          label: "Foot, Heel, and Toes",
         },
         {
-          value:"Confusion, Abrasion, Laceration, Scars",
-          label: "Confusion, Abrasion, Laceration, Scars"
+          value: "Confusion, Abrasion, Laceration, Scars",
+          label: "Confusion, Abrasion, Laceration, Scars",
         },
         {
-          value:"Loss of Limbs, Leg or Foot Amputation",
-          label: "Loss of Limbs, Leg or Foot Amputation"
+          value: "Loss of Limbs, Leg or Foot Amputation",
+          label: "Loss of Limbs, Leg or Foot Amputation",
         },
         {
-          value:"Other Lower Limb Injuries",
-          label: "Other Lower Limb Injuries"
+          value: "Other Lower Limb Injuries",
+          label: "Other Lower Limb Injuries",
         },
       ],
     },
     {
       value: "Neck and Cervical Spine",
-      label: "Neck and Cervical Spine"
+      label: "Neck and Cervical Spine",
     },
     {
       value: "Back, Thoracic and Lumbar Spine",
-      label: "Back, Thoracic and Lumbar Spine"
+      label: "Back, Thoracic and Lumbar Spine",
     },
     {
       value: "Upper Limb",
-      label: "Upper Limb"
+      label: "Upper Limb",
     },
     {
       value: "Neck and Cervical Spine",
-      label: "Neck and Cervical Spine"
+      label: "Neck and Cervical Spine",
     },
     {
       value: "Neck and Cervical Spine",
-      label: "Neck and Cervical Spine"
+      label: "Neck and Cervical Spine",
     },
   ];
 
@@ -127,8 +128,9 @@ const App = () => {
   const [selectedItem2, setSelectedItem2] = useState();
   const [selectedItem3, setSelectedItem3] = useState();
   const [showSearchInput, setShowSearchInput] = useState(false);
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState([]);
   const [toggleIcon, setToggleIcon] = useState(false);
+  const [searchCompleted, setSearchCompleted] = useState(false);
 
   const onChange1 = (value) => {
     console.log("setSelectedItem1(value):", value);
@@ -144,7 +146,12 @@ const App = () => {
     setShowSearchInput(!showSearchInput);
     setToggleIcon(!toggleIcon); // Toggle the icon state
   };
+  const handleSearch = () => {
+    // Perform the search logic here
 
+    // After the search is completed, set the searchCompleted state to true
+    setSearchCompleted(true);
+  };
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -154,25 +161,30 @@ const App = () => {
   return (
     <Layout className="layout">
       <Header
-        style={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={new Array(15).fill(null).map((_, index) => {
-            const key = index + 1;
-            return {
-              key,
-              label: `nav ${key}`,
-            };
-          })}
-        />
-      </Header>
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between", // Căn phần tử phía trái và phải
+  }}
+>
+  <div className="demo-logo" />
+  <Menu
+    theme="dark"
+    mode="horizontal"
+    defaultSelectedKeys={["1"]}
+    items={[
+      { key: "1", label: "Home" },
+      { key: "2", label: "About" },
+      { key: "3", label: "Services" },
+      { key: "4", label: "Contact" },
+    ]}
+  />
+  <div style={{ display: "flex", alignItems: "center" }}>
+    <Button type="text" danger icon={<LogoutOutlined />}>
+      Sign Out
+    </Button>
+  </div>
+</Header>
       <Content
         style={{
           padding: "0 50px",
@@ -187,10 +199,12 @@ const App = () => {
         </Button>
         {showSearchInput && (
           <div>
-            <SearchBar setResults={setResults}/>
-            {results && results.length > 0 && <SearchResultsList results={results} />}
+            <SearchBar setResults={setResults} onSearch={handleSearch} />
+            <SearchResultsList
+              results={results}
+              isSearchCompleted={searchCompleted}
+            />
           </div>
-          
         )}
         <div
           //   className="site-layout-content "
@@ -206,7 +220,10 @@ const App = () => {
               bordered
               dataSource={options}
               renderItem={(item) => (
-                <List.Item onClick={() => onChange1(item)}>
+                <List.Item
+                  onMouseEnter={() => onChange1(item)}
+                  style={{ cursor: "pointer" }}
+                >
                   <Typography.Text mark>[ICON]</Typography.Text> {item.value}
                 </List.Item>
               )}
@@ -219,24 +236,29 @@ const App = () => {
                 bordered
                 dataSource={selectedItem1.children}
                 renderItem={(item) => (
-                  <List.Item onClick={() => onChange2(item)}>
-                    <Typography.Text mark>[ICON]</Typography.Text> {item.value}
+                  <List.Item
+                    onMouseEnter={() => onChange2(item)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Typography.Text mark>[ICON]</Typography.Text>{" "}
+                    {item.value}
                   </List.Item>
                 )}
               />
             )}
-            {selectedItem1 && selectedItem2 && (
+            {selectedItem2 && (
               <List
+                className="col-4"
                 header={<div>Level 3</div>}
                 footer={<div>Footer</div>}
-                className="col-4"
                 bordered
-                dataSource={selectedItem2.children ?? []}
+                dataSource={selectedItem2.children}
                 renderItem={(item) => (
-                  <List.Item onClick={() => onChange3(item)}>
-                    <Typography.Text mark style={{ textAlign: "start" }}>
-                      [ICON]
-                    </Typography.Text>{" "}
+                  <List.Item
+                    onMouseEnter={() => onChange3(item)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <Typography.Text mark>[ICON]</Typography.Text>{" "}
                     {item.value}
                   </List.Item>
                 )}
@@ -245,15 +267,15 @@ const App = () => {
           </div>
         </div>
       </Content>
-
       <Footer
         style={{
           textAlign: "center",
         }}
       >
-        Ant Design ©2023 Created by Ant UED
+        Ant Design ©2018 Created by Ant UED
       </Footer>
     </Layout>
   );
 };
+
 export default App;

@@ -1,10 +1,17 @@
+import { HistoryOutlined } from "@ant-design/icons";
 
-export const SearchResultsList = ({ results }) => {
+export const SearchResultsList = ({ results, isSearchCompleted }) => {
   return (
     <div className="results-list">
-      {results.map((result, id) => {
-        return <div key={id}> {result.name}</div>;
-      })}
+      {isSearchCompleted &&
+        results.map((result, id) => (
+          <div key={id}>
+            <span>
+              <HistoryOutlined /> {result.name}
+            </span>
+            <br />
+          </div>
+        ))}
     </div>
   );
 };

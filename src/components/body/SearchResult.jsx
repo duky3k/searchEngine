@@ -1,9 +1,7 @@
 import React from "react";
 import { Button } from "antd";
-import { useHistory } from "react-router-dom";
 import Header from "./header";
 const SearchResultPage = ({ keyword }) => {
-    const history = useHistory();
 
     const handleButtonClick = (buttonNumber) => {
         // Do something when a button is clicked

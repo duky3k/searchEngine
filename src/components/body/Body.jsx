@@ -162,11 +162,7 @@ const App = () => {
   return (
     <Layout className="layout">
       <Header />
-      <Content
-        style={{
-          padding: "0 50px",
-        }}
-      >
+      <Content>
         <div
           style={{
             display: "flex",
@@ -186,7 +182,11 @@ const App = () => {
           </div>
         </div>
         {showSearchInput && (
-          <div>
+          <div
+            style={{
+              padding: "0 50px",
+            }}
+          >
             <SearchBar setResults={setResults} onSearch={handleSearch} />
             <SearchResultsList
               results={results}

@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
-import { Button, Modal, List, Typography, Space } from 'antd';
-import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
+import { Button, Modal, Collapse, Typography, List } from "antd";
+import "./ModalSugges.css";
+const { Panel } = Collapse;
 
 const ModalSugges = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedList, setSelectedList] = useState(null);
-  const [isListOpen, setIsListOpen] = useState({
-    'Did You Mean ?': false,
-    'Body Proximity Terms': false,
-    'Related Medical Terms': false,
-  });
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -25,38 +21,16 @@ const ModalSugges = () => {
 
   const handleListClick = (listName) => {
     setSelectedList(listName);
-    setIsListOpen((prevState) => ({
-      ...prevState,
-      [listName]: !prevState[listName],
-    }));
   };
 
-  const renderListItems = () => {
-    if (selectedList === 'Did You Mean ?') {
-      return (
-        <>
-          <List.Item>1. Item 1</List.Item>
-          <List.Item>2. Item 2</List.Item>
-          <List.Item>3. Item 3</List.Item>
-        </>
-      );
-    } else if (selectedList === 'Body Proximity Terms') {
-      return (
-        <>
-          <List.Item>1. Item 1</List.Item>
-          <List.Item>2. Item 2</List.Item>
-          <List.Item>3. Item 3</List.Item>
-        </>
-      );
-    } else if (selectedList === 'Related Medical Terms') {
-      return (
-        <>
-          <List.Item>1. Item 1</List.Item>
-          <List.Item>2. Item 2</List.Item>
-          <List.Item>3. Item 3</List.Item>
-        </>
-      );
-    }
+  const renderListItems = (listName) => {
+    // ? Render error list item?
+    const items = ["Item 1", "Item 2", "Item 3"];
+    return items.map((item, index) => (
+      <Typography.Text key={index} style={{ color: "red" }}>{`${
+        index + 1
+      }. ${item}`}</Typography.Text>
+    ));
   };
 
   return (
@@ -66,61 +40,63 @@ const ModalSugges = () => {
       </Button>
       <Modal
         title="Search Suggestions"
-        visible={isModalOpen}
+        open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <div>
-          <Space direction="vertical">
-            <Button
-              type="text"
-              onClick={() => handleListClick('Did You Mean ?')}
-              style={{ width: '100%', textAlign: 'left' }}
-            >
-              {isListOpen['Did You Mean ?'] ? (
-                <UpOutlined />
-              ) : (
-                <DownOutlined />
-              )}{' '}
-              Did You Mean ?
-            </Button>
-            {isListOpen['Did You Mean ?'] && (
-              <List>{renderListItems()}</List>
-            )}
-
-            <Button
-              type="text"
-              onClick={() => handleListClick('Body Proximity Terms')}
-              style={{ width: '100%', textAlign: 'left' }}
-            >
-              {isListOpen['Body Proximity Terms'] ? (
-                <UpOutlined />
-              ) : (
-                <DownOutlined />
-              )}{' '}
-              Body Proximity Terms
-            </Button>
-            {isListOpen['Body Proximity Terms'] && (
-              <List>{renderListItems()}</List>
-            )}
-
-            <Button
-              type="text"
-              onClick={() => handleListClick('Related Medical Terms')}
-              style={{ width: '100%', textAlign: 'left' }}
-            >
-              {isListOpen['Related Medical Terms'] ? (
-                <UpOutlined />
-              ) : (
-                <DownOutlined />
-              )}{' '}
-              Related Medical Terms
-            </Button>
-            {isListOpen['Related Medical Terms'] && (
-              <List>{renderListItems()}</List>
-            )}
-          </Space>
-        </div>
+        <Collapse accordion activeKey={selectedList} onChange={handleListClick}>
+          <Panel header="Did You Mean ?" key="Did You Mean ?">
+            {selectedList === "Did You Mean ?" &&
+              renderListItems("Did You Mean ?")}
+              
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>1.</Typography.Text>{" "}
+              <Typography.Text className="red-text">cargo hand</Typography.Text>
+            </List.Item>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>2.</Typography.Text>{" "}
+              <Typography.Text className="red-text">hand, wrist, and fingers</Typography.Text>
+            </List.Item>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>3.</Typography.Text>{" "}
+              <Typography.Text className="red-text">hand - abrasions</Typography.Text>
+            </List.Item>
+          </Panel>
+          <Panel header="Body Proximity Terms" key="Body Proximity Terms">
+            {selectedList === "Body Proximity Terms" &&
+              renderListItems("Body Proximity Terms")}
+              <Typography.Text strong>Where "eyelid" is found</Typography.Text>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>1.</Typography.Text>{" "}
+              <Typography.Text className="red-text">eye</Typography.Text>
+            </List.Item>
+            <Typography.Text strong>Nearby Body Parts</Typography.Text>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>1.</Typography.Text>{" "}
+              <Typography.Text className="red-text">eyebrow</Typography.Text>
+            </List.Item>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>2.</Typography.Text>{" "}
+              <Typography.Text className="red-text">eyelash</Typography.Text>
+            </List.Item>
+          </Panel>
+          <Panel header="Related Medical Terms" key="Related Medical Terms">
+            {selectedList === "Related Medical Terms" &&
+              renderListItems("Related Medical Terms")}
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>1.</Typography.Text>{" "}
+              <Typography.Text className="red-text">Item 1</Typography.Text>
+            </List.Item>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>2.</Typography.Text>{" "}
+              <Typography.Text className="red-text">Item 2</Typography.Text>
+            </List.Item>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>3.</Typography.Text>{" "}
+              <Typography.Text className="red-text">Item 3</Typography.Text>
+            </List.Item>
+          </Panel>
+        </Collapse>
       </Modal>
     </>
   );

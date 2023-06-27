@@ -132,17 +132,25 @@ const App = () => {
   const [results, setResults] = useState([]);
   const [toggleIcon, setToggleIcon] = useState(false);
   const [searchCompleted, setSearchCompleted] = useState(false);
-
+  const [isClicked, setIsClicked] = useState(0);
   const onChange1 = (value) => {
-    console.log("setSelectedItem1(value):", value);
     setSelectedItem1(value);
+    setSelectedItem2(undefined);
+    setSelectedItem3(undefined);
+    setIsClicked(1);
   };
+  
   const onChange2 = (value) => {
     setSelectedItem2(value);
+    setSelectedItem3(undefined);
+    setIsClicked(2);
   };
+  
   const onChange3 = (value) => {
     setSelectedItem3(value);
+    setIsClicked(3);
   };
+  
   const toggleSearchInput = () => {
     setShowSearchInput(!showSearchInput);
     setToggleIcon(!toggleIcon); // Toggle the icon state
@@ -209,7 +217,7 @@ const App = () => {
               dataSource={options}
               renderItem={(item) => (
                 <List.Item
-                  onMouseEnter={() => onChange1(item)}
+                  onClick={() => onChange1(item)}
                   style={{ cursor: "pointer" }}
                 >
                   <Typography.Text mark>[ICON]</Typography.Text> {item.value}
@@ -225,7 +233,7 @@ const App = () => {
                 dataSource={selectedItem1.children}
                 renderItem={(item) => (
                   <List.Item
-                    onMouseEnter={() => onChange2(item)}
+                  onClick={() => onChange2(item)}
                     style={{ cursor: "pointer" }}
                   >
                     <Typography.Text mark>[ICON]</Typography.Text> {item.value}
@@ -242,7 +250,7 @@ const App = () => {
                 dataSource={selectedItem2.children}
                 renderItem={(item) => (
                   <List.Item
-                    onMouseEnter={() => onChange3(item)}
+                  onClick={() => onChange3(item)}
                     style={{ cursor: "pointer" }}
                   >
                     <Typography.Text mark>[ICON]</Typography.Text> {item.value}

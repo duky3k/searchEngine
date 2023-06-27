@@ -1,0 +1,17 @@
+.list-item-selected {
+  background-color: red;
+  color: white;
+}
+
+.ant-list-item-icon {
+  display: none;
+}
+
+.list-item-selected .ant-list-item-icon {
+  display: inline-block;
+  float: right;
+}
+
+.levelHeader {
+  font-size: large;
+}

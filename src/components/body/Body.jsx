@@ -161,44 +161,30 @@ const App = () => {
   });
   return (
     <Layout className="layout">
-      {/* <Header
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between", // Căn phần tử phía trái và phải
-        }}
-      >
-        <div className="demo-logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["1"]}
-          items={[
-            { key: "1", label: "Home" },
-            { key: "2", label: "About" },
-            { key: "3", label: "Services" },
-            { key: "4", label: "Contact" },
-          ]}
-        />
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <Button type="text" danger icon={<LogoutOutlined />}>
-            Sign Out
-          </Button>
-        </div>
-      </Header> */}
-      <Header/>
+      <Header />
       <Content
         style={{
           padding: "0 50px",
         }}
       >
-        <Typography.Title level={4}>
-          Discover Cases By Nature Of Injury
-        </Typography.Title>
-        <Button type="text" onClick={toggleSearchInput}>
-          Other Search Options {toggleIcon ? <UpOutlined /> : <DownOutlined />}{" "}
-          {/* Toggle the icon */}
-        </Button>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography.Title level={4}>
+            Discover Cases By Nature Of Injury
+          </Typography.Title>
+          <div>
+            <Button type="text" onClick={toggleSearchInput}>
+              Other Search Options{" "}
+              {toggleIcon ? <UpOutlined /> : <DownOutlined />}{" "}
+              {/* Toggle the icon */}
+            </Button>
+          </div>
+        </div>
         {showSearchInput && (
           <div>
             <SearchBar setResults={setResults} onSearch={handleSearch} />
@@ -242,8 +228,7 @@ const App = () => {
                     onMouseEnter={() => onChange2(item)}
                     style={{ cursor: "pointer" }}
                   >
-                    <Typography.Text mark>[ICON]</Typography.Text>{" "}
-                    {item.value}
+                    <Typography.Text mark>[ICON]</Typography.Text> {item.value}
                   </List.Item>
                 )}
               />
@@ -260,8 +245,7 @@ const App = () => {
                     onMouseEnter={() => onChange3(item)}
                     style={{ cursor: "pointer" }}
                   >
-                    <Typography.Text mark>[ICON]</Typography.Text>{" "}
-                    {item.value}
+                    <Typography.Text mark>[ICON]</Typography.Text> {item.value}
                   </List.Item>
                 )}
               />

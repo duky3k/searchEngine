@@ -32,8 +32,12 @@ const SuggestionsNav = () => {
         </Typography>
       </div>
       <div className="suggestions-nav-body">
-        <Collapse accordion activeKey={selectedList} onChange={handleListClick}>
-          <Panel header="Did You Mean ?" key="Did You Mean ?">
+        <Collapse accordion activeKey={selectedList} onChange={handleListClick}
+          className='suggestions-panel-box'
+        >
+          <Panel header="Did You Mean ?" key="Did You Mean ?"
+            className='suggestions-panel-item'
+          >
             {selectedList === "Did You Mean ?" &&
               renderListItems("Did You Mean ?")}
             <List.Item className="modal-sugges">
@@ -49,7 +53,9 @@ const SuggestionsNav = () => {
               <Typography.Text className="red-text">hand - abrasions</Typography.Text>
             </List.Item>
           </Panel>
-          <Panel header="Body Proximity Terms" key="Body Proximity Terms">
+          <Panel header="Body Proximity Terms" key="Body Proximity Terms"
+            className='suggestions-panel-item'
+          >
             {selectedList === "Body Proximity Terms" &&
               renderListItems("Body Proximity Terms")}
             <Typography.Text strong>Where "eyelid" is found</Typography.Text>
@@ -67,7 +73,9 @@ const SuggestionsNav = () => {
               <Typography.Text className="red-text">eyelash</Typography.Text>
             </List.Item>
           </Panel>
-          <Panel header="Related Medical Terms" key="Related Medical Terms">
+          <Panel header="Related Medical Terms" key="Related Medical Terms"
+            className='suggestions-panel-item'
+          >
             {selectedList === "Related Medical Terms" &&
               renderListItems("Related Medical Terms")}
             <List.Item className="modal-sugges">

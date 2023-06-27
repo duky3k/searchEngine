@@ -19,7 +19,7 @@ const SuggestionsNav = () => {
         }. ${item}`}</Typography.Text>
     ));
   };
-  
+
   return (
     <div
       className="suggestions-nav-container"

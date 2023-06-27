@@ -1,8 +1,9 @@
+import { ConfigProvider } from "antd";
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import { ReactQueryDevtools } from "react-query/devtools";
 import Root from "./root";
 
 function App() {
@@ -20,7 +21,15 @@ function App() {
     return (
         <QueryClientProvider client={queryClient}>
             <BrowserRouter>
-                <Root />
+                <ConfigProvider
+                    theme={{
+                        token: {
+                            colorPrimary: "#751c24",
+                        },
+                    }}
+                >
+                    <Root />
+                </ConfigProvider>
             </BrowserRouter>
             <ReactQueryDevtools position={"bottom-right"} />
         </QueryClientProvider>

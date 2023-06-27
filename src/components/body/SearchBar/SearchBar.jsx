@@ -21,6 +21,19 @@ export const SearchBar = ({ setResults, onSearch }) => {
     fetchPopularKeywords();
   }, []);
 
+  useEffect(() => {
+    // Load search history from localStorage when the component mounts
+    const storedSearchHistory = localStorage.getItem("searchHistory");
+    if (storedSearchHistory) {
+      setSearchHistory(JSON.parse(storedSearchHistory));
+    }
+  }, []);
+  
+  useEffect(() => {
+    // Save search history to localStorage whenever it changes
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+  }, [searchHistory]);
+  
   const fetchPopularKeywords = () => {
     // Fetch popular keywords from backend API and set them as initial suggestions
     // Replace this with your actual API call to fetch popular keywords
@@ -33,7 +46,10 @@ export const SearchBar = ({ setResults, onSearch }) => {
       // Simulating API call delay with setTimeout
       setTimeout(() => {
         const apiSuggestions = ["Result 1", "Result 2", "Result 3"];
-        setSuggestions(apiSuggestions);
+        const filteredSuggestions = apiSuggestions.filter((suggestion) =>
+          suggestion.toLowerCase().includes(value.toLowerCase())
+        );
+        setSuggestions(filteredSuggestions);
       }, 500);
     } else {
       setSuggestions([]);
@@ -108,15 +124,18 @@ export const SearchBar = ({ setResults, onSearch }) => {
     },
     {
       label: "API Results",
-      options: suggestions.map((keyword, index) => ({
-        value: keyword,
-        label: (
-          <div key={`result-${index}`}>
-            {keyword}
-          </div>
-        ),
-      })),
-    },
+      options: suggestions.map((keyword, index) => {
+        const highlightedText = keyword.replace(new RegExp(`(${input})`, "gi"), '<span class="highlight">$1</span>');
+        return {
+          value: keyword,
+          label: (
+            <div key={`result-${index}`}>
+              <span dangerouslySetInnerHTML={{ __html: highlightedText }}></span>
+            </div>
+          ),
+        };
+      }),
+    },    
   ];
 
   return (
@@ -127,7 +146,7 @@ export const SearchBar = ({ setResults, onSearch }) => {
           onSelect={handleInputChange}
           onSearch={handleInputChange}
           value={input}
-          placeholder="Search"
+          placeholder="Search ICRS"
           onPressEnter={handleEnterPress}
           ref={autoCompleteRef}
           dropdownMatchSelectWidth={252}
@@ -137,6 +156,9 @@ export const SearchBar = ({ setResults, onSearch }) => {
           onMouseLeave={handleMouseLeave}
         >
           <Input
+            style={{
+              width: 'calc(100vw - 120px)'
+            }}
             suffix={<SearchOutlined />}
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -147,7 +169,11 @@ export const SearchBar = ({ setResults, onSearch }) => {
         <Button type="primary"
           // onClick={handleSearch}
           onClick={() => {
-            navigate('/result-details')
+            handleSearch();
+            const searchResult = input.trim();
+            if (searchResult !== "") {
+              navigate(`/result-details/${encodeURIComponent(searchResult)}`);
+            }
           }}
         >
           Search
@@ -159,7 +185,7 @@ export const SearchBar = ({ setResults, onSearch }) => {
       </div>
       <Modal
         title="Search Done"
-        visible={isModalVisible}
+        open={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         onOk={() => setIsModalVisible(false)}
       >

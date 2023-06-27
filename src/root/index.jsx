@@ -7,10 +7,10 @@ const Root = () => {
   return (
     <Routes>
       <Route element={<AdvancedSearch />} path="/" />
-      <Route element={<DetailSearch />} path="/result-details" />
+      <Route path="/result-details/:searchResult" element={<DetailSearch />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   )
 }
 
-export default Root
+export default Root;

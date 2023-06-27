@@ -1,12 +1,14 @@
 import React from 'react'
 import Header from '../../components/header/Header'
-import SearchResultCpn from '../../components/body/SearchResult/index'
-
+import { useParams } from 'react-router-dom'
 const DetailSearch = () => {
+  const { searchResult } = useParams();
+  console.log(searchResult);
   return (
     <div>
       <Header />
-      <SearchResultCpn />
+      123123123
+      <h1>Search Results: {searchResult}</h1>
     </div>
   )
 }

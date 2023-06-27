@@ -27,6 +27,7 @@
 .suggestions-nav-body {
     width: 100%;
     padding: 8px 16px;
+    border-radius: none;
 }
 
 .modal-sugges {
@@ -39,4 +40,25 @@
 }
 .red-text {
     color: red;
+    font-weight: 400;
+}
+
+.suggestions-panel-box {
+    border: none;
+}
+
+.suggestions-panel-item {
+    background-color: #e2dfdb;
+    font-weight: bold;
+    margin: 4px 0;
+    border-radius: 4px !important;
+}
+
+.ant-collapse-header {
+    border-radius: 4px !important;
+}
+
+.ant-collapse-content-box {
+    border: 1px solid #ccc;
+    border-radius: 0 0 4px 4px;
 }

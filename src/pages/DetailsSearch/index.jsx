@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
-import Header from '../../components/header/Header'
-import { useParams } from 'react-router-dom'
-import SearchResultCpn from '../../components/body/SearchResult/index';
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { Button, Typography } from 'antd';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { SearchBar } from '../../components/body/SearchBar/SearchBar';
 import { SearchResultsList } from '../../components/body/SearchBar/SearchResultList';
-import { Button, Typography } from 'antd';
-import { DownOutlined, UpOutlined, LogoutOutlined } from "@ant-design/icons";
+import SearchResultCpn from '../../components/body/SearchResult/index';
+import Header from '../../components/header/Header';
 import './DetailSearch.css';
+
 const DetailSearch = () => {
   const { searchResult } = useParams();
   const [showSearchInput, setShowSearchInput] = useState(false);

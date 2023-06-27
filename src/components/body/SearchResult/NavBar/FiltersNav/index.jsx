@@ -69,16 +69,16 @@ const FiltersNav = () => {
     }
   };
 
-  const handleItemChange = (itemId) => {
-    const itemKey = itemId.toString();
-    const checked = checkedKeys.includes(itemKey);
+  // const handleItemChange = (itemId) => {
+  //   const itemKey = itemId.toString();
+  //   const checked = checkedKeys.includes(itemKey);
 
-    if (checked) {
-      setCheckedKeys(checkedKeys.filter((key) => key !== itemKey));
-    } else {
-      setCheckedKeys([...checkedKeys, itemKey]);
-    }
-  };
+  //   if (checked) {
+  //     setCheckedKeys(checkedKeys.filter((key) => key !== itemKey));
+  //   } else {
+  //     setCheckedKeys([...checkedKeys, itemKey]);
+  //   }
+  // };
 
   const handleToggleShowMore = (e, categoryId) => {
     e.stopPropagation();

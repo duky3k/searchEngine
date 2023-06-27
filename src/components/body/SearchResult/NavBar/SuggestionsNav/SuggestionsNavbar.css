@@ -1,6 +1,30 @@
 .suggestions-nav-container {
     background-color: white;
-    padding: 16px;
     margin: 4px 0;
     border-radius: 4px;
+}
+
+.suggestions-nav-header {
+    width: 100%;
+    padding: 8px 16px;
+    border: none;
+    display: flex;
+    align-items: center;
+    border-radius: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.suggestions-icons {
+    transform: rotate(180deg);
+    margin-right: 8px;
+}
+
+.suggestions-label {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.suggestions-nav-body {
+    width: 100%;
+    padding: 8px 16px;
 }

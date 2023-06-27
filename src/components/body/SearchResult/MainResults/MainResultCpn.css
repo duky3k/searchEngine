@@ -1,0 +1,7 @@
+.main-result-cpn-container {
+  margin: 4px 0 4px 8px;
+  display: flex;
+  background-color: white;
+  padding: 16px;
+  border-radius: 4px;
+}

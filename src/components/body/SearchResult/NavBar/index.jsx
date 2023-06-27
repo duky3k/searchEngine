@@ -1,8 +1,16 @@
-import React from 'react'
+import React from 'react';
+import SuggestionsNav from './SuggestionsNav';
+import SearchWithinNav from './SearchWithinNav';
+import FiltersNav from './FiltersNav';
+import './NavBarCpn.css';
 
 const NavBarCpn = () => {
   return (
-    <div>NavBarCpn</div>
+    <div className='nav-bar-cpn-container'>
+      <SuggestionsNav />
+      <SearchWithinNav />
+      <FiltersNav />
+    </div>
   )
 }
 

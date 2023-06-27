@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button, Input, Modal, AutoComplete } from "antd";
 import { SearchOutlined, HistoryOutlined } from "@ant-design/icons";
 import "./SearchBar.css";
+import { useNavigate } from "react-router-dom";
 
 export const SearchBar = ({ setResults, onSearch }) => {
   const [input, setInput] = useState("");
@@ -12,6 +13,8 @@ export const SearchBar = ({ setResults, onSearch }) => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isInputHovered, setIsInputHovered] = useState(false);
   const autoCompleteRef = useRef();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch popular keywords from backend API and set them as initial suggestions
@@ -141,7 +144,12 @@ export const SearchBar = ({ setResults, onSearch }) => {
         </AutoComplete>
       </div>
       <div className="button-wrapper">
-        <Button type="primary" onClick={handleSearch}>
+        <Button type="primary"
+          // onClick={handleSearch}
+          onClick={() => {
+            navigate('/result-details')
+          }}
+        >
           Search
         </Button>
         <Button type="primary">Advanced Search</Button>

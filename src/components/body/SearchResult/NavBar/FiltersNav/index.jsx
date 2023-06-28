@@ -171,13 +171,13 @@ const FiltersNav = () => {
                 onClick={() => handleCategoryChange(category.id)}
                 className='filters-panel-category'
               >
-                <div>
+                <div onClick={(e) => e.stopPropagation()}>
                   {categoryItems.slice(0, 3).map((item) => (
                     <Checkbox
                       style={{ display: 'flex' }}
                       key={item.id}
                       checked={checkedKeys.includes(item.id.toString())}
-                      onChange={() => setCheckedKeys(prevKeys => {
+                      onChange={() => setCheckedKeys((prevKeys) => {
                         if (prevKeys.includes(item.id.toString())) {
                           return prevKeys.filter(key => key !== item.id.toString());
                         }

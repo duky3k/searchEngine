@@ -1,7 +1,39 @@
 .main-result-cpn-container {
-  margin: 4px 0 4px 8px;
-  display: flex;
-  background-color: white;
-  padding: 16px;
-  border-radius: 4px;
+    margin: 4px 0 4px 8px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.applied-filters-container {
+    display: flex;
+    align-items: baseline;
+    padding: 8px 16px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.applied-filters-title {
+    margin-right: 8px;
+    font-weight: bold !important;
+    font-size: 20px;
+}
+
+.applied-filters-text {
+    font-size: 16px;
+}
+
+.current-search-container {
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+    padding: 8px 16px;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+}
+
+.current-search-title {
+    font-weight: bold !important;
+    margin-right: 8px;
 }

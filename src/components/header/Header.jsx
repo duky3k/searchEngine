@@ -13,12 +13,14 @@ const Header = () => {
         <img src={logo} alt="Logo" />
       </div>
       <div className="user-info">
-      <Avatar className="user-avatar" icon={<UserOutlined />} />
+        <Avatar className="user-avatar" icon={<UserOutlined />} />
         <Text className="username">Elizabeth Lincoln</Text>
-        
+
         <Button
           type="text"
-          icon={<ExportOutlined />}
+          icon={<ExportOutlined
+            className='logout-icon'
+          />}
           className="logout-button"
         >
           <span>Sign Out</span>

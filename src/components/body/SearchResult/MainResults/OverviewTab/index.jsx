@@ -5,28 +5,9 @@ import InfoIcon from '@mui/icons-material/Info';
 import { PrinterOutlined } from '@ant-design/icons';
 import ReactECharts from 'echarts-for-react';
 import TimeLineHorizontal from './TimeLineHorizontal';
-
-const scatterData = [
-  [0, 1],
-  [1, 3],
-  [2, 4],
-  [3, 4],
-  [4, 5],
-  [5, 6],
-  [6, 7],
-  [7, 6],
-  [8, 7],
-  [9, 7],
-  [10, 8],
-  [11, 8],
-];
-
-const barData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-
-const yAxis = [2000, 2002, 2004, 2006, 2008, 2010, 2012, 2014, 2016, 2018, 2020, 2022]
+import { fakeDatabarOverviewTab, fakeDatascatterOverviewTab, fakeDatayAxisOverviewTab } from '../../../../../constant/constants';
 
 const OverviewTab = () => {
-
   const [chartType, setChartType] = useState('scatter');
 
   const option = useMemo(() => {
@@ -52,7 +33,7 @@ const OverviewTab = () => {
             alignWithLabel: true
           },
           // prettier-ignore
-          data: yAxis
+          data: fakeDatayAxisOverviewTab,
         }
       ],
       yAxis: {
@@ -91,7 +72,7 @@ const OverviewTab = () => {
         {
           name: 'Injury',
           symbolSize: 20,
-          data: chartType === 'scatter' ? scatterData : barData,
+          data: chartType === 'scatter' ? fakeDatascatterOverviewTab : fakeDatabarOverviewTab,
           type: chartType,
           color: '#751c24',
         }

@@ -1,29 +1,11 @@
-import React from 'react'
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import { Tabs } from 'antd';
-import OverviewTab from './OverviewTab';
+import React from 'react';
+import { dataTab } from '../../../../constant/constants';
 
 const { TabPane } = Tabs;
 
-const data = [
-  {
-    id: 0,
-    icon: CorporateFareIcon,
-    name: 'Overview',
-    children: OverviewTab
-  },
-  {
-    id: 1,
-    icon: FormatListBulletedIcon,
-    name: 'List of Cases',
-    children: FormatListBulletedIcon
-  }
-]
 
 const TableSearchQuery = () => {
-
-
   return (
     <div
       className='table-search-query-container'
@@ -34,7 +16,7 @@ const TableSearchQuery = () => {
         size='large'
       >
         {
-          data.map((value) => {
+          dataTab.map((value) => {
             return (
               <TabPane tab={
                 <span>

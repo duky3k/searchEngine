@@ -58,14 +58,3 @@
     justify-content: space-between;
     margin: 8px 0;
 }
-
-.filter-nav-control-btn {
-    border: none;
-    color: #ca1818;
-    transition: all 0.5s ease;
-}
-
-.filter-nav-control-btn:hover {
-    color: #ac0707 !important;
-    transform: scale(1.02);
-}

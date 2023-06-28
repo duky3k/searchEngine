@@ -1,37 +1,45 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-  height: 80px;
-  padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    height: 80px;
+    padding: 0 20px;
 }
 
 .logo {
-  width: 200px;
+    width: 200px;
 }
 
 .logo img {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
 }
 
 .user-info {
     display: flex;
     align-items: center;
-  }
-  
-  .user-avatar {
+}
+
+.user-avatar {
     margin-right: 10px;
-  }
-  
+}
 
 .logout-button {
-  background-color: burlywood;
-  border: none;
-  margin-left: 20px;
+    background-color: #751c24;
+    border: none;
+    margin-left: 20px;
+    transition: all 0.5s ease;
 }
 
 .logout-button span {
-  color: black;
+    color: white;
+}
+
+.logout-button:hover {
+    background-color: white;
+}
+
+.logout-button:hover span {
+    color: #751c24;
 }

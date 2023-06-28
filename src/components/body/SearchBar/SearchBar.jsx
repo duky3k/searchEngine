@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, Input, Modal, AutoComplete } from "antd";
+import { Button, Input, Modal, AutoComplete, Space } from "antd";
 import { SearchOutlined, HistoryOutlined } from "@ant-design/icons";
 import "./SearchBar.css";
 import { useNavigate } from "react-router-dom";
@@ -28,12 +28,12 @@ export const SearchBar = ({ setResults, onSearch }) => {
       setSearchHistory(JSON.parse(storedSearchHistory));
     }
   }, []);
-  
+
   useEffect(() => {
     // Save search history to localStorage whenever it changes
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
   }, [searchHistory]);
-  
+
   const fetchPopularKeywords = () => {
     // Fetch popular keywords from backend API and set them as initial suggestions
     // Replace this with your actual API call to fetch popular keywords
@@ -65,7 +65,9 @@ export const SearchBar = ({ setResults, onSearch }) => {
 
   const handleSearch = () => {
     setIsModalVisible(true);
-    setSearchHistory((prevHistory) => Array.from(new Set([...prevHistory, input])));
+    setSearchHistory((prevHistory) =>
+      Array.from(new Set([...prevHistory, input]))
+    );
     setInput("");
     onSearch();
   };
@@ -103,11 +105,7 @@ export const SearchBar = ({ setResults, onSearch }) => {
       label: "Popular Keywords",
       options: popularKeywords.map((keyword, index) => ({
         value: keyword,
-        label: (
-          <div key={`popular-${index}`}>
-            {keyword}
-          </div>
-        ),
+        label: <div key={`popular-${index}`}>{keyword}</div>,
       })),
     },
     {
@@ -125,17 +123,22 @@ export const SearchBar = ({ setResults, onSearch }) => {
     {
       label: "API Results",
       options: suggestions.map((keyword, index) => {
-        const highlightedText = keyword.replace(new RegExp(`(${input})`, "gi"), '<span class="highlight">$1</span>');
+        const highlightedText = keyword.replace(
+          new RegExp(`(${input})`, "gi"),
+          '<span class="highlight">$1</span>'
+        );
         return {
           value: keyword,
           label: (
             <div key={`result-${index}`}>
-              <span dangerouslySetInnerHTML={{ __html: highlightedText }}></span>
+              <span
+                dangerouslySetInnerHTML={{ __html: highlightedText }}
+              ></span>
             </div>
           ),
         };
       }),
-    },    
+    },
   ];
 
   return (
@@ -149,7 +152,7 @@ export const SearchBar = ({ setResults, onSearch }) => {
           placeholder="Search ICRS"
           onPressEnter={handleEnterPress}
           ref={autoCompleteRef}
-          dropdownMatchSelectWidth={252}
+          popupMatchSelectWidth={252}
           onFocus={() => handleInputFocus(input)}
           onBlur={handleInputBlur}
           onMouseEnter={handleMouseEnter}
@@ -157,7 +160,7 @@ export const SearchBar = ({ setResults, onSearch }) => {
         >
           <Input
             style={{
-              width: 'calc(100vw - 120px)'
+              width: "calc(100vw - 120px)",
             }}
             suffix={<SearchOutlined />}
             value={input}
@@ -166,8 +169,8 @@ export const SearchBar = ({ setResults, onSearch }) => {
         </AutoComplete>
       </div>
       <div className="button-wrapper">
-        <Button type="primary"
-          // onClick={handleSearch}
+        <Button
+          className="button"
           onClick={() => {
             handleSearch();
             const searchResult = input.trim();
@@ -178,11 +181,11 @@ export const SearchBar = ({ setResults, onSearch }) => {
         >
           Search
         </Button>
-        <Button type="primary">Advanced Search</Button>
-        <Button type="primary" onClick={handleClearHistory}>
+        <Button className="button" onClick={handleClearHistory}>
           Clear History
         </Button>
       </div>
+
       <Modal
         title="Search Done"
         open={isModalVisible}

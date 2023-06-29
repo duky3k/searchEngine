@@ -2,15 +2,15 @@ import {
   Button,
   Layout,
   List,
-  Menu,
   Typography,
   theme,
 } from "antd";
-import { DownOutlined, UpOutlined, LogoutOutlined } from "@ant-design/icons";
-import { useEffect, useRef, useState } from "react";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
 import { SearchBar } from "./SearchBar/SearchBar";
 import { SearchResultsList } from "./SearchBar/SearchResultList";
 import Header from "../header/Header";
+import "./Body.css";
 const { Content, Footer } = Layout;
 
 const App = () => {
@@ -116,13 +116,21 @@ const App = () => {
       label: "Upper Limb",
     },
     {
-      value: "Neck and Cervical Spine",
-      label: "Neck and Cervical Spine",
+      value: "Torso and Internal Organs",
+      label: "Torso and Internal Organs",
     },
     {
-      value: "Neck and Cervical Spine",
-      label: "Neck and Cervical Spine",
+      value: "Lower Limb",
+      label: "Lower Limb",
     },
+    {
+      value: "Miscellaneous",
+      label: "Miscellaneous",
+    },
+    {
+      value: "Psychiatric",
+      label: "Psychiatric"
+    }
   ];
 
   const [selectedItem1, setSelectedItem1] = useState();
@@ -170,15 +178,17 @@ const App = () => {
   return (
     <Layout className="layout">
       <Header />
-      <Content>
+      <Content style={{backgroundColor: "#e2dfdb"}}>
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            padding: "12px 16px",
+            background: "#e2dfdb"
           }}
         >
-          <Typography.Title level={4}>
+          <Typography.Title level={4} style={{fontSize:"25px"}}>
             Discover Cases By Nature Of Injury
           </Typography.Title>
           <div>
@@ -208,11 +218,26 @@ const App = () => {
             background: colorBgContainer,
           }}
         >
-          <div className="d-flex flex-row row">
+          <div style={
+            {
+              display: "flex",
+              flexDirection:"row",
+              width:"100%",
+              height:"100%",
+              minHeight:"100vh",
+              borderTop:" 1px solid #000",
+              borderBottom:" 1px solid #000",
+              padding:" 20px ",
+              backgroundColor:"#e2dfdb"
+            }
+          }>
+            <div>
+              
+            </div>
             <List
               className="col-4"
-              header={<div>Level 1</div>}
-              footer={<div>Footer</div>}
+              style={{background:"#fff"}}
+              header={<h4>Level 1</h4>}
               bordered
               dataSource={options}
               renderItem={(item) => (
@@ -220,15 +245,15 @@ const App = () => {
                   onClick={() => onChange1(item)}
                   style={{ cursor: "pointer" }}
                 >
-                  <Typography.Text mark>[ICON]</Typography.Text> {item.value}
+                  <Typography.Text >{item.value}</Typography.Text> 
                 </List.Item>
               )}
             />
             {selectedItem1 && (
               <List
                 className="col-4"
-                header={<div>Level 2</div>}
-                footer={<div>Footer</div>}
+                style={{background:"#fff"}}
+                header={<h4>Level 2</h4>}
                 bordered
                 dataSource={selectedItem1.children}
                 renderItem={(item) => (
@@ -236,7 +261,7 @@ const App = () => {
                   onClick={() => onChange2(item)}
                     style={{ cursor: "pointer" }}
                   >
-                    <Typography.Text mark>[ICON]</Typography.Text> {item.value}
+                    <Typography.Text >{item.value}</Typography.Text> 
                   </List.Item>
                 )}
               />
@@ -244,8 +269,8 @@ const App = () => {
             {selectedItem2 && (
               <List
                 className="col-4"
-                header={<div>Level 3</div>}
-                footer={<div>Footer</div>}
+                style={{background:"#fff"}}
+                header={<h4>Level 3</h4>}
                 bordered
                 dataSource={selectedItem2.children}
                 renderItem={(item) => (
@@ -253,7 +278,7 @@ const App = () => {
                   onClick={() => onChange3(item)}
                     style={{ cursor: "pointer" }}
                   >
-                    <Typography.Text mark>[ICON]</Typography.Text> {item.value}
+                    <Typography.Text >{item.value}</Typography.Text> 
                   </List.Item>
                 )}
               />

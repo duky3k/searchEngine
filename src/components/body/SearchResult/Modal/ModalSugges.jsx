@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Collapse, Typography, List } from "antd";
 import "./ModalSugges.css";
+import { AlertOutlined } from "@ant-design/icons";
 const { Panel } = Collapse;
 
 const ModalSugges = () => {
@@ -35,8 +36,8 @@ const ModalSugges = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Open Modal
+      <Button onClick={showModal}>
+      <AlertOutlined /> Suggestions
       </Button>
       <Modal
         title="Search Suggestions"
@@ -59,7 +60,23 @@ const ModalSugges = () => {
             </List.Item>
             <List.Item className="modal-sugges">
               <Typography.Text strong>3.</Typography.Text>{" "}
+              <Typography.Text className="red-text">abrasion on right hand</Typography.Text>
+            </List.Item>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>4.</Typography.Text>{" "}
               <Typography.Text className="red-text">hand - abrasions</Typography.Text>
+            </List.Item>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>5.</Typography.Text>{" "}
+              <Typography.Text className="red-text">contusion of right hand</Typography.Text>
+            </List.Item>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>6.</Typography.Text>{" "}
+              <Typography.Text className="red-text">hand -bruise</Typography.Text>
+            </List.Item>
+            <List.Item className="modal-sugges">
+              <Typography.Text strong>7.</Typography.Text>{" "}
+              <Typography.Text className="red-text">abrasion on both hands</Typography.Text>
             </List.Item>
           </Panel>
           <Panel header="Body Proximity Terms" key="Body Proximity Terms">

@@ -37,7 +37,7 @@ const DetailSearch = () => {
       <div
         className='detail-search-search-bar'
       >
-        <Typography.Title level={4}>
+        <Typography.Title level={4} style={{fontSize:"25px"}} >
           Discover Cases By Nature Of Injury
         </Typography.Title>
         <div>

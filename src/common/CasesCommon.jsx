@@ -23,7 +23,7 @@ const CasesCommon = (props) => {
           props.value.options.map((option) => {
             console.log(option)
             return (
-              <Collapse activeKey={expandedKeys} accordion
+              <Collapse activeKey={expandedKeys} accordion={false}
                 onChange={handleCheckOption}
                 className='case-common-box'
               >

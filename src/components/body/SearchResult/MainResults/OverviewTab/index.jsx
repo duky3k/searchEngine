@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import './OverviewTab.css'
 import { Button, Typography } from 'antd'
 import InfoIcon from '@mui/icons-material/Info';
@@ -6,9 +6,12 @@ import { PrinterOutlined } from '@ant-design/icons';
 import ReactECharts from 'echarts-for-react';
 import TimeLineHorizontal from './TimeLineHorizontal';
 import { fakeDatabarOverviewTab, fakeDatascatterOverviewTab, fakeDatayAxisOverviewTab } from '../../../../../constant/constants';
+import jsPDF from "jspdf";
+import html2canvas from 'html2canvas';
 
 const OverviewTab = () => {
   const [chartType, setChartType] = useState('scatter');
+  const reportChart = useRef(null);
 
   const tooltipFormatter = useCallback((params) => {
     let content;
@@ -125,6 +128,45 @@ const OverviewTab = () => {
     };
   }, [chartType, tooltipFormatter]);
 
+  const handleGeneratePdf = async () => {
+    const doc = new jsPDF({
+      orientation: 'l', // landscape
+      unit: 'pt', // points, pixels won't work properly
+      // format: [canvas.width, canvas.height]
+    });
+
+    const options = {
+      scale: 2, // Adjust the scale factor as needed
+      useCORS: true, // Enable CORS if exporting images from external sources
+      scrollX: 0,
+      scrollY: 0,
+      width: reportChart.current.offsetWidth,
+      height: reportChart.current.offsetHeight
+    };
+
+    try {
+      const canvas = await html2canvas(reportChart.current, options);
+
+      const imgData = canvas.toDataURL('image/png');
+      const imgProps = doc.getImageProperties(imgData);
+
+      const pdfWidth = doc.internal.pageSize.getWidth();
+      const pdfHeight = doc.internal.pageSize.getHeight();
+
+      const ratio = Math.min(pdfWidth / imgProps.width, pdfHeight / imgProps.height);
+      const imgWidth = imgProps.width * ratio;
+      const imgHeight = imgProps.height * ratio;
+
+      const marginLeft = (pdfWidth - imgWidth) / 2;
+      const marginTop = (pdfHeight - imgHeight) / 2;
+
+      doc.addImage(imgData, 'PNG', marginLeft === 0 ? 20 : marginLeft, marginTop, imgWidth, imgHeight);
+      doc.save(`Pain and Suffering Award Amounts of Past Cases (${chartType} chart).pdf`);
+    } catch (error) {
+      console.log('Error exporting to PDF:', error);
+    }
+  };
+
   return (
     <div
       className='overview-tab-container'
@@ -138,25 +180,30 @@ const OverviewTab = () => {
         </Typography.Text>
         <Button
           className='overview-tab-print-btn'
+          onClick={handleGeneratePdf}
         >
           <PrinterOutlined />
           Print Overview
         </Button>
       </div>
 
-      {/* Time line */}
-      <div>
-        <TimeLineHorizontal />
-      </div>
+      <div
+        ref={reportChart}
+      >
+        {/* Time line */}
+        <div>
+          <TimeLineHorizontal />
+        </div>
 
-      {/* React Chart */}
-      <div className='overview-tab-chart-container'>
-        <ReactECharts
-          option={option}
-          style={{ height: '600px', width: '100%' }}
-        />
+        {/* React Chart */}
+        <div className='overview-tab-chart-container'
+        >
+          <ReactECharts
+            option={option}
+            style={{ height: '600px', width: '100%' }}
+          />
+        </div>
       </div>
-
       {/* Control Box */}
       <div>
         <Button

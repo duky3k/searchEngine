@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import './OverviewTab.css'
 import { Button, Typography } from 'antd'
 import InfoIcon from '@mui/icons-material/Info';
@@ -9,6 +9,48 @@ import { fakeDatabarOverviewTab, fakeDatascatterOverviewTab, fakeDatayAxisOvervi
 
 const OverviewTab = () => {
   const [chartType, setChartType] = useState('scatter');
+
+  const tooltipFormatter = useCallback((params) => {
+    let content;
+
+    switch (chartType) {
+      case 'scatter':
+        content = [
+          `<b>Case:</b> ${params.seriesName}<br/>`,
+          `<b>Date:</b> ${params.name}<br/>`,
+          `<b>Award Amount:</b> $${params.data[0] * 1000}.00<br/>`,
+          `<b>Injuries:</b> Fracture of nasal septum<br/>`,
+          `<b>Level 1:</b> Head<br/>`,
+          `<b>Level 2:</b> Nose and Smell<br/>`,
+          `<b>Level 3:</b> Fracture of Sinus<br/>`
+        ];
+        break;
+
+      case 'bar':
+        content = [
+          `<b>Case:</b> ${params.seriesName}<br/>`,
+          `<b>Date:</b> ${params.name}<br/>`,
+          `<b>Award Amount:</b> $${params.data * 1000}.00<br/>`,
+          `<b>Injuries:</b> Fracture of nasal septum<br/>`,
+          `<b>Level 1:</b> Head<br/>`,
+          `<b>Level 2:</b> Nose and Smell<br/>`,
+          `<b>Level 3:</b> Fracture of Sinus<br/>`
+        ];
+        break;
+
+      default:
+        content = [
+          `<b>Case:</b> ${params.seriesName}<br/>`,
+          `<b>Date:</b> ${params.name}<br/>`,
+          `<b>Award Amount:</b> $${params.data[0] * 1000}.00<br/>`,
+          `<b>Injuries:</b> Fracture of nasal septum<br/>`,
+          `<b>Level 1:</b> Head<br/>`,
+          `<b>Level 2:</b> Nose and Smell<br/>`,
+          `<b>Level 3:</b> Fracture of Sinus<br/>`
+        ];
+    }
+    return content;
+  }, [chartType]);
 
   const option = useMemo(() => {
     return {
@@ -60,6 +102,9 @@ const OverviewTab = () => {
         trigger: 'item',
         axisPointer: {
           type: 'cross'
+        },
+        formatter: function (params) {
+          return tooltipFormatter(params).join('');
         }
       },
       legend: {
@@ -78,7 +123,7 @@ const OverviewTab = () => {
         }
       ]
     };
-  }, [chartType]);
+  }, [chartType, tooltipFormatter]);
 
   return (
     <div

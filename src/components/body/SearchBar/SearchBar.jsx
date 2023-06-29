@@ -177,11 +177,16 @@ export const SearchBar = ({ setResults, onSearch }) => {
         </AutoComplete>
       </div>
       <div className="button-wrapper">
-        <Button className="button" style={{ backgroundColor: "#800000", color:"#fff" }}>
+        <Button
+          className="button"
+          style={{ backgroundColor: "#800000", color: "#fff" }}
+        >
           {" "}
           <EyeOutlined /> Discover Cases By Nature Of Injury
         </Button>
-        <ModalSugges />
+        <div className="button">
+          <ModalSugges />
+        </div>
         <Button
           className="button"
           onClick={() => {
@@ -198,7 +203,6 @@ export const SearchBar = ({ setResults, onSearch }) => {
           <SaveOutlined /> Saved Searches
         </Button>
       </div>
-
       <Modal
         title="Search Done"
         open={isModalVisible}

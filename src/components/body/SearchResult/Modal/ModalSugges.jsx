@@ -35,9 +35,12 @@ const ModalSugges = () => {
   };
 
   return (
-    <>
-      <Button onClick={showModal}>
-      <AlertOutlined /> Suggestions
+    <div
+    >
+      <Button onClick={showModal}  style={{
+        width: "100%",
+      }}>
+        <AlertOutlined /> Suggestions
       </Button>
       <Modal
         title="Search Suggestions"
@@ -49,40 +52,52 @@ const ModalSugges = () => {
           <Panel header="Did You Mean ?" key="Did You Mean ?">
             {selectedList === "Did You Mean ?" &&
               renderListItems("Did You Mean ?")}
-              
+
             <List.Item className="modal-sugges">
               <Typography.Text strong>1.</Typography.Text>{" "}
               <Typography.Text className="red-text">cargo hand</Typography.Text>
             </List.Item>
             <List.Item className="modal-sugges">
               <Typography.Text strong>2.</Typography.Text>{" "}
-              <Typography.Text className="red-text">hand, wrist, and fingers</Typography.Text>
+              <Typography.Text className="red-text">
+                hand, wrist, and fingers
+              </Typography.Text>
             </List.Item>
             <List.Item className="modal-sugges">
               <Typography.Text strong>3.</Typography.Text>{" "}
-              <Typography.Text className="red-text">abrasion on right hand</Typography.Text>
+              <Typography.Text className="red-text">
+                abrasion on right hand
+              </Typography.Text>
             </List.Item>
             <List.Item className="modal-sugges">
               <Typography.Text strong>4.</Typography.Text>{" "}
-              <Typography.Text className="red-text">hand - abrasions</Typography.Text>
+              <Typography.Text className="red-text">
+                hand - abrasions
+              </Typography.Text>
             </List.Item>
             <List.Item className="modal-sugges">
               <Typography.Text strong>5.</Typography.Text>{" "}
-              <Typography.Text className="red-text">contusion of right hand</Typography.Text>
+              <Typography.Text className="red-text">
+                contusion of right hand
+              </Typography.Text>
             </List.Item>
             <List.Item className="modal-sugges">
               <Typography.Text strong>6.</Typography.Text>{" "}
-              <Typography.Text className="red-text">hand -bruise</Typography.Text>
+              <Typography.Text className="red-text">
+                hand -bruise
+              </Typography.Text>
             </List.Item>
             <List.Item className="modal-sugges">
               <Typography.Text strong>7.</Typography.Text>{" "}
-              <Typography.Text className="red-text">abrasion on both hands</Typography.Text>
+              <Typography.Text className="red-text">
+                abrasion on both hands
+              </Typography.Text>
             </List.Item>
           </Panel>
           <Panel header="Body Proximity Terms" key="Body Proximity Terms">
             {selectedList === "Body Proximity Terms" &&
               renderListItems("Body Proximity Terms")}
-              <Typography.Text strong>Where "eyelid" is found</Typography.Text>
+            <Typography.Text strong>Where "eyelid" is found</Typography.Text>
             <List.Item className="modal-sugges">
               <Typography.Text strong>1.</Typography.Text>{" "}
               <Typography.Text className="red-text">eye</Typography.Text>
@@ -115,7 +130,7 @@ const ModalSugges = () => {
           </Panel>
         </Collapse>
       </Modal>
-    </>
+    </div>
   );
 };
 

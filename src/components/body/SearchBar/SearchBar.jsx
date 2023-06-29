@@ -11,6 +11,9 @@ import {
 import "./SearchBar.css";
 import { useNavigate } from "react-router-dom";
 import ModalSugges from "../SearchResult/Modal/ModalSugges";
+import { useQuery } from "react-query";
+import { QUERY_KEY } from "../../../constant/constants";
+import { getListSearchHistory } from "../../../services/search/searchHistory.services";
 
 export const SearchBar = ({ setResults, onSearch }) => {
   const [input, setInput] = useState("");
@@ -23,6 +26,12 @@ export const SearchBar = ({ setResults, onSearch }) => {
   const autoCompleteRef = useRef();
 
   const navigate = useNavigate();
+
+  const { data, isLoading } = useQuery([QUERY_KEY.HISTORY_RESULTS], () =>
+    getListSearchHistory()
+  );
+
+  console.log(data, isLoading);
 
   useEffect(() => {
     // Fetch popular keywords from backend API and set them as initial suggestions

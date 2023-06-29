@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Button, Input, Modal, AutoComplete, Space } from "antd";
-import { SearchOutlined, HistoryOutlined } from "@ant-design/icons";
+import { Button, Input, Modal, AutoComplete } from "antd";
+import {
+  SearchOutlined,
+  HistoryOutlined,
+  SaveOutlined,
+  ToolOutlined,
+  EyeOutlined,
+  AlertOutlined,
+} from "@ant-design/icons";
 import "./SearchBar.css";
 import { useNavigate } from "react-router-dom";
+import ModalSugges from "../SearchResult/Modal/ModalSugges";
 
 export const SearchBar = ({ setResults, onSearch }) => {
   const [input, setInput] = useState("");
@@ -37,7 +45,7 @@ export const SearchBar = ({ setResults, onSearch }) => {
   const fetchPopularKeywords = () => {
     // Fetch popular keywords from backend API and set them as initial suggestions
     // Replace this with your actual API call to fetch popular keywords
-    const fetchedPopularKeywords = ["Keyword 1", "Keyword 2", "Keyword 3"];
+    const fetchedPopularKeywords = ["Limb", "Hand", "Eye"];
     setPopularKeywords(fetchedPopularKeywords);
   };
 
@@ -169,6 +177,11 @@ export const SearchBar = ({ setResults, onSearch }) => {
         </AutoComplete>
       </div>
       <div className="button-wrapper">
+        <Button className="button" style={{ backgroundColor: "#800000", color:"#fff" }}>
+          {" "}
+          <EyeOutlined /> Discover Cases By Nature Of Injury
+        </Button>
+        <ModalSugges />
         <Button
           className="button"
           onClick={() => {
@@ -179,10 +192,10 @@ export const SearchBar = ({ setResults, onSearch }) => {
             }
           }}
         >
-          Search
+          <ToolOutlined /> Advanced Search
         </Button>
         <Button className="button" onClick={handleClearHistory}>
-          Clear History
+          <SaveOutlined /> Saved Searches
         </Button>
       </div>
 

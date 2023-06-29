@@ -1,9 +1,8 @@
 import { Tabs } from 'antd';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { dataTab } from '../../../../constant/constants';
 
 const { TabPane } = Tabs;
-
 
 const TableSearchQuery = () => {
   return (
@@ -18,13 +17,14 @@ const TableSearchQuery = () => {
         {
           dataTab.map((value) => {
             return (
-              <TabPane tab={
-                <span>
-                  <value.icon sx={{ mr: 1 }} />
-                  {value.name}
-                </span>
-              } key={value.id}
-              >
+              <TabPane
+                key={value.id}
+                tab={
+                  <span>
+                    <value.icon sx={{ mr: 1 }} />
+                    {value.name}
+                  </span>
+                }>
                 <value.children />
               </TabPane>
             )

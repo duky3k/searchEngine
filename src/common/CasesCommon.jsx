@@ -21,7 +21,6 @@ const CasesCommon = (props) => {
       >
         {
           props.value.options.map((option) => {
-            console.log(option)
             return (
               <Collapse activeKey={expandedKeys} accordion
                 onChange={handleCheckOption}

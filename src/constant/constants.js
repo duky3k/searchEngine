@@ -2,7 +2,6 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import OverviewTab from "../components/body/SearchResult/MainResults/OverviewTab";
 import ListOfCases from "../components/body/SearchResult/MainResults/ListOfCasesTab";
-
 export const URI = {
     RESULT_DETAILS: "/result-details",
     NOT_PERMIT: "/403",
@@ -12,6 +11,7 @@ export const URI = {
 
 export const QUERY_KEY = {
     RESULT_DETAILS: "RESULT_DETAILS",
+    HISTORY_RESULTS: "HISTORY_RESULTS"
 };
 
 export const FORMAT_DATE = "DD.MM.YYYY";

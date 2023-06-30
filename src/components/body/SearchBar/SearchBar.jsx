@@ -19,7 +19,7 @@ export const SearchBar = ({ setResults, onSearch }) => {
   const [input, setInput] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [searchHistory, setSearchHistory] = useState([]);
-  const [popularKeywords, setPopularKeywords] = useState([]);
+  // const [popularKeywords, setPopularKeywords] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isInputHovered, setIsInputHovered] = useState(false);
@@ -33,10 +33,10 @@ export const SearchBar = ({ setResults, onSearch }) => {
 
   console.log(data, isLoading);
 
-  useEffect(() => {
-    // Fetch popular keywords from backend API and set them as initial suggestions
-    fetchPopularKeywords();
-  }, []);
+  // useEffect(() => {
+  //   // Fetch popular keywords from backend API and set them as initial suggestions
+  //   fetchPopularKeywords();
+  // }, []);
 
   useEffect(() => {
     // Load search history from localStorage when the component mounts
@@ -51,12 +51,12 @@ export const SearchBar = ({ setResults, onSearch }) => {
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
   }, [searchHistory]);
 
-  const fetchPopularKeywords = () => {
-    // Fetch popular keywords from backend API and set them as initial suggestions
-    // Replace this with your actual API call to fetch popular keywords
-    const fetchedPopularKeywords = ["Limb", "Hand", "Eye"];
-    setPopularKeywords(fetchedPopularKeywords);
-  };
+  // const fetchPopularKeywords = () => {
+  //   // Fetch popular keywords from backend API and set them as initial suggestions
+  //   // Replace this with your actual API call to fetch popular keywords
+  //   const fetchedPopularKeywords = ["Limb", "Hand", "Eye"];
+  //   setPopularKeywords(fetchedPopularKeywords);
+  // };
 
   const fetchData = (value) => {
     if (value.trim() !== "") {
@@ -89,10 +89,6 @@ export const SearchBar = ({ setResults, onSearch }) => {
     onSearch();
   };
 
-  const handleClearHistory = () => {
-    setSearchHistory([]);
-    localStorage.removeItem("searchHistory");
-  };
 
   const handleEnterPress = () => {
     if (input.trim() !== "") {
@@ -118,13 +114,13 @@ export const SearchBar = ({ setResults, onSearch }) => {
   };
 
   const options = [
-    {
-      label: "Popular Keywords",
-      options: popularKeywords.map((keyword, index) => ({
-        value: keyword,
-        label: <div key={`popular-${index}`}>{keyword}</div>,
-      })),
-    },
+    // {
+    //   label: "Popular Keywords",
+    //   options: popularKeywords.map((keyword, index) => ({
+    //     value: keyword,
+    //     label: <div key={`popular-${index}`}>{keyword}</div>,
+    //   })),
+    // },
     {
       label: "Search History",
       options: searchHistory.map((keyword, index) => ({
@@ -199,7 +195,7 @@ export const SearchBar = ({ setResults, onSearch }) => {
         <Button
           className="button"
           onClick={() => {
-            handleSearch();
+            // handleSearch();
             const searchResult = input.trim();
             if (searchResult !== "") {
               navigate(`/result-details/${encodeURIComponent(searchResult)}`);
@@ -208,12 +204,12 @@ export const SearchBar = ({ setResults, onSearch }) => {
         >
           <ToolOutlined /> Advanced Search
         </Button>
-        <Button className="button" onClick={handleClearHistory}>
+        <Button className="button" onClick={handleSearch}>
           <SaveOutlined /> Saved Searches
         </Button>
       </div>
       <Modal
-        title="Search Done"
+        title="History Search"
         open={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         onOk={() => setIsModalVisible(false)}

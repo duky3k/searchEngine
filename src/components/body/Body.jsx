@@ -147,18 +147,18 @@ const App = () => {
     setSelectedItem3(undefined);
     setIsClicked(1);
   };
-  
+
   const onChange2 = (value) => {
     setSelectedItem2(value);
     setSelectedItem3(undefined);
     setIsClicked(2);
   };
-  
+
   const onChange3 = (value) => {
     setSelectedItem3(value);
     setIsClicked(3);
   };
-  
+
   const toggleSearchInput = () => {
     setShowSearchInput(!showSearchInput);
     setToggleIcon(!toggleIcon); // Toggle the icon state
@@ -189,31 +189,27 @@ const App = () => {
           }}
         >
           <Typography.Title level={4} style={{fontSize:"25px"}}>
-            Discover Cases By Nature Of Injury
+            Search injury cases
           </Typography.Title>
           <div>
             <Button type="text" onClick={toggleSearchInput}>
               Other Search Options{" "}
               {toggleIcon ? <UpOutlined /> : <DownOutlined />}{" "}
-              {/* Toggle the icon */}
             </Button>
           </div>
         </div>
-        {showSearchInput && (
-          <div
+        <div
             style={{
               padding: "0 50px",
             }}
-          >
-            <SearchBar setResults={setResults} onSearch={handleSearch} />
-            <SearchResultsList
+        >
+          <SearchBar setResults={setResults} onSearch={handleSearch} />
+          <SearchResultsList
               results={results}
               isSearchCompleted={searchCompleted}
-            />
-          </div>
-        )}
+          />
+        </div>
         <div
-          //   className="site-layout-content "
           style={{
             background: colorBgContainer,
           }}
@@ -232,7 +228,7 @@ const App = () => {
             }
           }>
             <div>
-              
+
             </div>
             <List
               className="col-4"
@@ -245,7 +241,7 @@ const App = () => {
                   onClick={() => onChange1(item)}
                   style={{ cursor: "pointer" }}
                 >
-                  <Typography.Text >{item.value}</Typography.Text> 
+                  <Typography.Text >{item.value}</Typography.Text>
                 </List.Item>
               )}
             />
@@ -261,7 +257,7 @@ const App = () => {
                   onClick={() => onChange2(item)}
                     style={{ cursor: "pointer" }}
                   >
-                    <Typography.Text >{item.value}</Typography.Text> 
+                    <Typography.Text >{item.value}</Typography.Text>
                   </List.Item>
                 )}
               />
@@ -278,7 +274,7 @@ const App = () => {
                   onClick={() => onChange3(item)}
                     style={{ cursor: "pointer" }}
                   >
-                    <Typography.Text >{item.value}</Typography.Text> 
+                    <Typography.Text >{item.value}</Typography.Text>
                   </List.Item>
                 )}
               />
@@ -291,7 +287,7 @@ const App = () => {
           textAlign: "center",
         }}
       >
-        Ant Design ©2018 Created by Ant UED
+        CMCG 2023
       </Footer>
     </Layout>
   );

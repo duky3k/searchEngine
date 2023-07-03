@@ -17,7 +17,7 @@ import { getListSearchHistory } from "../../../services/search/searchHistory.ser
 
 export const SearchBar = ({ setResults, onSearch }) => {
   const [input, setInput] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isSaveSearch, setIsSaveSearch] = useState(false);
   const [searchHistory, setSearchHistory] = useState([]);
   // const [popularKeywords, setPopularKeywords] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
@@ -28,35 +28,10 @@ export const SearchBar = ({ setResults, onSearch }) => {
   const navigate = useNavigate();
 
   const { data, isLoading } = useQuery([QUERY_KEY.HISTORY_RESULTS], () =>
-    getListSearchHistory()
+      getListSearchHistory()
   );
-
-  console.log(data, isLoading);
-
-  // useEffect(() => {
-  //   // Fetch popular keywords from backend API and set them as initial suggestions
-  //   fetchPopularKeywords();
-  // }, []);
-
-  useEffect(() => {
-    // Load search history from localStorage when the component mounts
-    const storedSearchHistory = localStorage.getItem("searchHistory");
-    if (storedSearchHistory) {
-      setSearchHistory(JSON.parse(storedSearchHistory));
-    }
-  }, []);
-
-  useEffect(() => {
-    // Save search history to localStorage whenever it changes
-    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
-  }, [searchHistory]);
-
-  // const fetchPopularKeywords = () => {
-  //   // Fetch popular keywords from backend API and set them as initial suggestions
-  //   // Replace this with your actual API call to fetch popular keywords
-  //   const fetchedPopularKeywords = ["Limb", "Hand", "Eye"];
-  //   setPopularKeywords(fetchedPopularKeywords);
-  // };
+  //
+  // console.log(data, isLoading);
 
   const fetchData = (value) => {
     if (value.trim() !== "") {
@@ -80,19 +55,14 @@ export const SearchBar = ({ setResults, onSearch }) => {
     }
   };
 
-  const handleSearch = () => {
-    setIsModalVisible(true);
-    setSearchHistory((prevHistory) =>
-      Array.from(new Set([...prevHistory, input]))
-    );
-    setInput("");
-    onSearch();
+  const handleSaveSearch = () => {
+    setIsSaveSearch(true);
   };
 
 
   const handleEnterPress = () => {
     if (input.trim() !== "") {
-      handleSearch();
+      handleSaveSearch();
     }
   };
 
@@ -204,15 +174,15 @@ export const SearchBar = ({ setResults, onSearch }) => {
         >
           <ToolOutlined /> Advanced Search
         </Button>
-        <Button className="button" onClick={handleSearch}>
+        <Button className="button" onClick={handleSaveSearch}>
           <SaveOutlined /> Saved Searches
         </Button>
       </div>
       <Modal
         title="History Search"
-        open={isModalVisible}
-        onCancel={() => setIsModalVisible(false)}
-        onOk={() => setIsModalVisible(false)}
+        open={isSaveSearch}
+        onCancel={() => setIsSaveSearch(false)}
+        onOk={() => setIsSaveSearch(false)}
       >
         Search done
       </Modal>

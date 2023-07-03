@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Route, Routes } from "react-router-dom";
-import AdvancedSearch from '../pages/AdvancedSearch';
+import AdvancedSearch from '../pages/AdvanceSearch';
 import DetailSearch from '../pages/DetailsSearch';
 
 const Root = () => {
